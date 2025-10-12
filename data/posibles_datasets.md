@@ -1,0 +1,26 @@
+
+# Posibles  para entrenar el modelo de embeddings
+
+| Dataset Name | Link | Description |
+|---|---|---|
+| FinMTEB: Finance Massive Text Embedding Benchmark | https://github.com/yixuantt/finmteb | Contains 64 financial domain-specific datasets across 7 tasks (classification, retrieval, ranking, etc). Focuses on financial news, ESG, annual reports, regulatory filings, and includes both English and Chinese data. |
+| Investopedia Embedding Dataset | https://huggingface.co/datasets/FinLang/investopedia-embedding-dataset | Financial Q&A pairs and concepts curated from Investopedia, LLM-verified for accuracy and structured. Covers broad finance terminology, practical applications, and definitions. |
+| SEC Filings Embedding Dataset | https://huggingface.co/llmware/industry-bert-sec-v0.1 | Fine-tuned on thousands of SEC regulatory filings and public corporate disclosure documents. Excellent for compliance, accounting, legal, and public company analysis tasks. |
+| Earnings Call Transcripts Dataset | https://huggingface.co/datasets/jlh-ibm/earnings_call | Includes 188 earnings call transcripts from NASDAQ-listed firms, paired with stock and index data. Useful for financial reporting and event-driven modeling. |
+| Financial PhraseBank | https://www.taloussanomat.fi/rahoitus/2013/08/13/phrasebank/20138413/uuid | Over 4,800 professionally-annotated finance sentences with sentiment labels (positive, negative, neutral). Widely used for financial sentiment model training and benchmarking. |
+| FiQA (Financial QA) | https://sites.google.com/view/fiqa/home | Dataset for aspect-based sentiment and opinion-oriented financial QA, with expert-reviewed answer pairs. Suitable for semantic retrieval, sentiment, and financial information extraction tasks. |
+| Finance Alpaca | https://huggingface.co/datasets/hongfenglu/finance-alpaca | Synthetic question-answer pairs spanning stock market, corporate finance, regulation, and investing. Designed for domain adaptation and instruction-tuning of embeddings models. |
+| ESG Reports Dataset | https://huggingface.co/datasets/vidore/esg_reports_eng_v2 | Curated benchmark of ESG disclosures and reports from major corporates for sustainability-focused analysis. Useful for ESG-related retrieval, classification, and regulatory compliance tasks. |
+| Financial Regulation Corpus | https://huggingface.co/datasets/Proooof/Financial_Regulation_Corpus | Synthetic and real regulatory texts from EU and US domains, prepared for AI research in compliance and legal analytics. Allows for robust embedding model evaluation in the regulation sector. |
+
+| Dataset Name | Link | Description |
+|---|---|---|
+| FinMTEB: Finance Massive Text Embedding Benchmark | https://github.com/yixuantt/finmteb | Contains 64 financial domain-specific datasets across 7 tasks (classification, retrieval, ranking, etc). Focuses on financial news, ESG, annual reports, regulatory filings, and includes both English and Chinese data. |
+| Investopedia Embedding Dataset | https://huggingface.co/datasets/FinLang/investopedia-embedding-dataset | Financial Q&A pairs and concepts curated from Investopedia, LLM-verified for accuracy and structured. Covers broad finance terminology, practical applications, and definitions. |
+| SEC Filings Embedding Dataset | https://huggingface.co/llmware/industry-bert-sec-v0.1 | Fine-tuned on thousands of SEC regulatory filings and public corporate disclosure documents. Excellent for compliance, accounting, legal, and public company analysis tasks. |
+| Earnings Call Transcripts Dataset | https://huggingface.co/datasets/jlh-ibm/earnings_call | Includes 188 earnings call transcripts from NASDAQ-listed firms, paired with stock and index data. Useful for financial reporting and event-driven modeling. |
+| Financial PhraseBank | https://www.taloussanomat.fi/rahoitus/2013/08/13/phrasebank/20138413/uuid | Over 4,800 professionally-annotated finance sentences with sentiment labels (positive, negative, neutral). Widely used for financial sentiment model training and benchmarking. |
+| FiQA (Financial QA) | https://sites.google.com/view/fiqa/home | Dataset for aspect-based sentiment and opinion-oriented financial QA, with expert-reviewed answer pairs. Suitable for semantic retrieval, sentiment, and financial information extraction tasks. |
+| Finance Alpaca | https://huggingface.co/datasets/hongfenglu/finance-alpaca | Synthetic question-answer pairs spanning stock market, corporate finance, regulation, and investing. Designed for domain adaptation and instruction-tuning of embeddings models. |
+| ESG Reports Dataset | https://huggingface.co/datasets/vidore/esg_reports_eng_v2 | Curated benchmark of ESG disclosures and reports from major corporates for sustainability-focused analysis. Useful for ESG-related retrieval, classification, and regulatory compliance tasks. |
+| Financial Regulation Corpus | https://huggingface.co/datasets/Proooof/Financial_Regulation_Corpus | Synthetic and real regulatory texts from EU and US domains, prepared for AI research in compliance and legal analytics. Allows for robust embedding model evaluation in the regulation sector. |

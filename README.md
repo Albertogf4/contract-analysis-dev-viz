@@ -15,7 +15,7 @@ Facilitar la búsqueda trazable y la extracción estructurada de campos esencial
 ## Plan 
 
 ### Fase 0 — Setup & entrenamiento modelo(semana 1-2)
-- Crear repositorio y estructura (`backend/`, `frontend/`, `data/`, `eval/`).
+- Crear repositorio y estructura.
 - Definir esquema mínimo de datos y **Pydantic models** para las entidades a extraer.
 - Preparar un pequeño dataset de prueba.
 - Elección modelos baseline
