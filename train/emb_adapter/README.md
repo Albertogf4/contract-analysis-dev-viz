@@ -36,3 +36,32 @@ python -m train.emb_adapter.scripts.build_index \
 
 
 
+## Training Model
+
+
+To execute the training:
+python -m train.emb_adapter.scripts.train_adapter \
+  --train_json ./data/train.json \
+  --negatives_pdf ./data/nvidia_10k.pdf \
+  --out ./adapters/linear_adapter_30epochs.pth \
+  --epochs 30 --batch_size 32 --lr 3e-3 --warmup 100 --margin 1.0
+
+
+## Validation
+To evaluate baseline model:
+```bash
+python -m train.emb_adapter.scripts.eval_adapter \
+  --val_json ./data/validation.json \
+  --db_path ./chroma_db \
+  --collection sf_collection \
+  --k 10
+```
+To evaluate model with adapter:
+```bash
+python -m train.emb_adapter.scripts.eval_adapter \
+  --val_json ./data/validation.json \
+  --db_path ./chroma_db \
+  --collection sf_collection \
+  --k 10 \
+  --adapter ./adapters/linear_adapter_30epochs.pth
+```
