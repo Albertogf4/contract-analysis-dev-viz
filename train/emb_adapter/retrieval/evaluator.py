@@ -15,6 +15,15 @@ class QueryEncoder:
         self.adapter = adapter
         self.device = device
 
+        # Move adapter to the target device
+        if self.adapter is not None:
+            import torch
+            dev = torch.device(self.device) if self.device else (
+                torch.device("cuda") if torch.cuda.is_available() else
+                (torch.device("mps") if torch.backends.mps.is_available() else torch.device("cpu"))
+            )
+            self.adapter = self.adapter.to(dev)
+
     def encode_query_numpy(self, query: str):
         if self.adapter is None:
             return self.base.encode_to_numpy(query)
@@ -23,6 +32,7 @@ class QueryEncoder:
             torch.device("cuda") if torch.cuda.is_available() else
             (torch.device("mps") if torch.backends.mps.is_available() else torch.device("cpu"))
         )
+        # print(f"Encoding query on device: {dev}")
         with torch.no_grad():
             q = self.base.encode_to_tensor(query).to(dev)
             out = self.adapter(q)

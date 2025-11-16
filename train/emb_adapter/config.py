@@ -47,7 +47,7 @@ class PathsConfig:
     corpus_pdf: str = "./data/Apple_Environmental_Progress_Report_2024.pdf"
     negatives_pdf: str = "./data/nvidia_10k.pdf"
     train_json: str = "./data/train.json"
-    validation_json: str = "./data/validation.json"
+    val_json: str = "./data/validation.json"
     adapter_out: str = "./adapters/linear_adapter.pth"
 
 @dataclass
