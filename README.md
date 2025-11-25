@@ -34,8 +34,8 @@ Facilitar la búsqueda trazable y la extracción estructurada de campos esencial
 
 ### Fase 3 — Grafo y visualización (semanas 7-8)
 - Construcción de un **grafo**.
-- Desarrollo de un **dashboard** con buscador, tabla de campos y vista de grafo básica (zoom/pan).
+- Desarrollo de un **dashboard** con buscador, tabla de campos y vista de grafo básica.
 
 ### Fase 4 — Evaluación y entrega (semanas 9-10)
-- Evaluación de métricas de extracción por campo (precisión/recobrado en dataset pequeño).
+- Evaluación de métricas de extracción por campo.
 - Preparación de la **demo y documentación** final.
