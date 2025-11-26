@@ -1,7 +1,7 @@
 "use client"
 
-import { useRef } from "react"
-import { Upload, FileText } from "lucide-react"
+import { useRef, useState } from "react"
+import { Upload, FileText, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
 import { DocumentList } from "./document-list"
@@ -30,6 +30,39 @@ export function DocumentPanel({
 }: DocumentPanelProps) {
   const { toast } = useToast()
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const [isCheckingHealth, setIsCheckingHealth] = useState(false)
+
+  const handleCheckHealth = async () => {
+    setIsCheckingHealth(true)
+    try {
+      const response = await fetch(`${process.env.BACKEND_API_URL || "http://localhost:5328"}/api/health`, {
+        method: "GET",
+      })
+
+      if (!response.ok) {
+        throw new Error("API health check failed")
+      }
+
+      const data = await response.json()
+
+      if (data.status === "ok") {
+        toast({
+          title: "API Connected",
+          description: "Backend API is working correctly.",
+        })
+      } else {
+        throw new Error("Unexpected response from API")
+      }
+    } catch (error) {
+      toast({
+        title: "API Connection Failed",
+        description: error instanceof Error ? error.message : "Unable to connect to backend API",
+        variant: "destructive",
+      })
+    } finally {
+      setIsCheckingHealth(false)
+    }
+  }
 
   const handleFileSelect = async (file: File) => {
     if (!file.type.includes("pdf")) {
@@ -103,9 +136,20 @@ export function DocumentPanel({
     <div className="w-96 border-r border-border flex flex-col bg-card">
       {/* Header */}
       <div className="p-6 border-b border-border">
-        <div className="flex items-center gap-2 mb-4">
-          <FileText className="w-5 h-5" />
-          <h1 className="text-lg font-semibold">Documents</h1>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <FileText className="w-5 h-5" />
+            <h1 className="text-lg font-semibold">Documents</h1>
+          </div>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={handleCheckHealth}
+            disabled={isCheckingHealth}
+            title="Test API connection"
+          >
+            <Zap className="w-4 h-4" />
+          </Button>
         </div>
       </div>
 
