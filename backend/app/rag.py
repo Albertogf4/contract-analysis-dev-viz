@@ -3,7 +3,7 @@ from typing import List
 
 from .config import Settings
 from .models import RAGResult
-from .preprocessing import parse_pdf_to_document
+from .preprocessing import parse_pdf_to_document_pypdf2
 from .chunking import chunk_parsed_document
 from .vectorstore import ChromaVectorStore
 from .embeddings import OpenAILLMClient
@@ -16,7 +16,7 @@ class DocumentIndexer:
 
     def index_pdf(self, file_path: str) -> str:
         # 1. Parse PDF (stub -> Llamaparse in future)
-        parsed_doc = parse_pdf_to_document(file_path)
+        parsed_doc = parse_pdf_to_document_pypdf2(file_path)
 
         # 2. Chunk
         chunks = chunk_parsed_document(parsed_doc, self.settings)

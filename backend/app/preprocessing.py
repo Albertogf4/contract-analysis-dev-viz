@@ -4,6 +4,7 @@ import os
 from typing import Optional
 
 from .models import ParsedPage, ParsedDocument
+from PyPDF2 import PdfReader
 
 
 def parse_pdf_to_document(file_path: str, document_id: Optional[str] = None) -> ParsedDocument:
@@ -31,4 +32,21 @@ def parse_pdf_to_document(file_path: str, document_id: Optional[str] = None) -> 
         document_id=document_id,
         filename=os.path.basename(file_path),
         pages=[page],
+    )
+
+def parse_pdf_to_document_pypdf2(file_path: str, document_id: Optional[str] = None) -> ParsedDocument:
+    if document_id is None:
+        document_id = str(uuid.uuid4())
+    reader = PdfReader(file_path)
+    pages: list[ParsedPage] = []
+    for idx, page in enumerate(reader.pages, start=1):
+        try:
+            text = page.extract_text() or ""
+        except Exception:
+            text = ""
+        pages.append(ParsedPage(page_number=idx, text=text))
+    return ParsedDocument(
+        document_id=document_id,
+        filename=os.path.basename(file_path),
+        pages=pages,
     )
