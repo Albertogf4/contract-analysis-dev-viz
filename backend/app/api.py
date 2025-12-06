@@ -10,6 +10,7 @@ from .vectorstore import ChromaVectorStore
 from .rag import DocumentIndexer, RAGPipeline
 from .graph_builder import KnowledgeGraphBuilder
 from .knowledge_graph import KnowledgeGraphStore
+from .graph_context import GraphContextRetriever
 
 
 def create_app() -> Flask:
@@ -38,9 +39,14 @@ def create_app() -> Flask:
 
     graph_store = KnowledgeGraphStore(settings)
     graph_builder = KnowledgeGraphBuilder(settings)
+    graph_context_retriever = GraphContextRetriever(  
+        settings=settings,
+        graph_store=graph_store,
+        embedder=embedding_client,
+    )
 
     indexer = DocumentIndexer(settings, vector_store, graph_builder=graph_builder, graph_store=graph_store)
-    rag_pipeline = RAGPipeline(settings, vector_store, llm_client)
+    rag_pipeline = RAGPipeline(settings, vector_store, llm_client, graph_context_retriever=graph_context_retriever)
 
     # ---------- Routes ----------
 

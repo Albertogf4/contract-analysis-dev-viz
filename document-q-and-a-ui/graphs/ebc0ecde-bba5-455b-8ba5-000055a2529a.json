@@ -1,0 +1,331 @@
+{
+  "document_id": "ebc0ecde-bba5-455b-8ba5-000055a2529a",
+  "nodes": [
+    {
+      "id": "contract",
+      "label": "Contrato de Financiación",
+      "type": "entity",
+      "description": "Acuerdo legal entre Prestamista(s) y Prestatario para otorgar financiación con condiciones específicas."
+    },
+    {
+      "id": "prestamista",
+      "label": "Prestamista(s)",
+      "type": "entity",
+      "description": "Entidad financiera que concede el préstamo al Prestatario."
+    },
+    {
+      "id": "prestatario",
+      "label": "Prestatario",
+      "type": "entity",
+      "description": "Sociedad que recibe la financiación para inversión, capital circulante o refinanciación."
+    },
+    {
+      "id": "garante",
+      "label": "Garante(s) / Obligado(s) solidario(s)",
+      "type": "entity",
+      "description": "Entidad que garantiza el cumplimiento de las obligaciones del Prestatario, si aplica."
+    },
+    {
+      "id": "term_loan",
+      "label": "Term Loan (TL)",
+      "type": "instrument",
+      "description": "Préstamo a plazo fijo de EUR 5.000.000,00 con vencimiento a 48 meses."
+    },
+    {
+      "id": "revolving_credit",
+      "label": "Revolving Credit Facility (RCF)",
+      "type": "instrument",
+      "description": "Línea de crédito renovable hasta EUR 2.500.000,00 con disposiciones y reembolsos rotativos."
+    },
+    {
+      "id": "loan_amount",
+      "label": "Importe del Préstamo",
+      "type": "metric",
+      "description": "Monto máximo total de la financiación, EUR 7.500.000,00."
+    },
+    {
+      "id": "currency",
+      "label": "Moneda Euro (EUR)",
+      "type": "entity",
+      "description": "Moneda en la que se otorga la financiación."
+    },
+    {
+      "id": "law",
+      "label": "Ley Aplicable - España",
+      "type": "entity",
+      "description": "Jurisdicción legal que regula el contrato."
+    },
+    {
+      "id": "conditions_precedent",
+      "label": "Condiciones Precedentes (CP)",
+      "type": "process",
+      "description": "Requisitos que deben cumplirse antes del desembolso del préstamo."
+    },
+    {
+      "id": "disbursement",
+      "label": "Desembolso",
+      "type": "process",
+      "description": "Proceso de entrega efectiva de los fondos al Prestatario."
+    },
+    {
+      "id": "interest_rate",
+      "label": "Tipo de Interés",
+      "type": "metric",
+      "description": "Interés variable basado en EURIBOR más margen o tipo fijo acordado."
+    },
+    {
+      "id": "fees",
+      "label": "Comisiones y Costes",
+      "type": "metric",
+      "description": "Cargos asociados al préstamo, incluyendo apertura, no disposición y agencia."
+    },
+    {
+      "id": "amortization",
+      "label": "Amortización",
+      "type": "process",
+      "description": "Reembolso del principal del préstamo en cuotas periódicas."
+    },
+    {
+      "id": "maturity",
+      "label": "Fecha de Vencimiento",
+      "type": "metric",
+      "description": "Fecha límite para el pago total del préstamo, 48 meses desde el desembolso inicial."
+    },
+    {
+      "id": "prepayment",
+      "label": "Prepago",
+      "type": "process",
+      "description": "Pago anticipado total o parcial del préstamo con posibles comisiones."
+    },
+    {
+      "id": "covenants",
+      "label": "Compromisos (Covenants)",
+      "type": "risk",
+      "description": "Obligaciones y restricciones que el Prestatario debe cumplir durante la vigencia del préstamo."
+    },
+    {
+      "id": "affirmative_covenants",
+      "label": "Covenants Afirmativos",
+      "type": "risk",
+      "description": "Obligaciones positivas como mantener licencias, pagar impuestos y cumplir normativas."
+    },
+    {
+      "id": "negative_covenants",
+      "label": "Covenants Negativos",
+      "type": "risk",
+      "description": "Restricciones como no incurrir en deuda adicional o no disponer activos esenciales sin autorización."
+    },
+    {
+      "id": "financial_covenants",
+      "label": "Covenants Financieros",
+      "type": "metric",
+      "description": "Ratios financieros que el Prestatario debe mantener, como Leverage, DSCR e ICR."
+    },
+    {
+      "id": "financial_reporting",
+      "label": "Información Financiera y Reporting",
+      "type": "process",
+      "description": "Entrega periódica de estados financieros y reportes al Prestamista."
+    },
+    {
+      "id": "events_default",
+      "label": "Eventos de Incumplimiento",
+      "type": "risk",
+      "description": "Situaciones que pueden causar vencimiento anticipado del préstamo."
+    },
+    {
+      "id": "account",
+      "label": "Cuenta Designada",
+      "type": "entity",
+      "description": "Cuenta bancaria donde se realiza el desembolso y pagos relacionados."
+    },
+    {
+      "id": "use_of_funds",
+      "label": "Uso de Fondos",
+      "type": "process",
+      "description": "Destinos permitidos para los fondos, como inversión, capital circulante o refinanciación."
+    },
+    {
+      "id": "prohibited_uses",
+      "label": "Restricciones de Uso",
+      "type": "risk",
+      "description": "Usos prohibidos del préstamo, como distribución de dividendos o actividades ilícitas."
+    },
+    {
+      "id": "material_adverse_change",
+      "label": "Material Adverse Change (MAC)",
+      "type": "risk",
+      "description": "Notificación obligatoria de cambios adversos significativos en la situación del Prestatario."
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "prestamista",
+      "target": "contract",
+      "relation": "enters into"
+    },
+    {
+      "id": "e2",
+      "source": "prestatario",
+      "target": "contract",
+      "relation": "enters into"
+    },
+    {
+      "id": "e3",
+      "source": "garante",
+      "target": "contract",
+      "relation": "guarantees obligations under"
+    },
+    {
+      "id": "e4",
+      "source": "contract",
+      "target": "term_loan",
+      "relation": "includes instrument"
+    },
+    {
+      "id": "e5",
+      "source": "contract",
+      "target": "revolving_credit",
+      "relation": "includes instrument"
+    },
+    {
+      "id": "e6",
+      "source": "term_loan",
+      "target": "loan_amount",
+      "relation": "part of"
+    },
+    {
+      "id": "e7",
+      "source": "revolving_credit",
+      "target": "loan_amount",
+      "relation": "part of"
+    },
+    {
+      "id": "e8",
+      "source": "contract",
+      "target": "currency",
+      "relation": "denominated in"
+    },
+    {
+      "id": "e9",
+      "source": "contract",
+      "target": "law",
+      "relation": "governed by"
+    },
+    {
+      "id": "e10",
+      "source": "conditions_precedent",
+      "target": "disbursement",
+      "relation": "must be fulfilled before"
+    },
+    {
+      "id": "e11",
+      "source": "disbursement",
+      "target": "account",
+      "relation": "funds transferred to"
+    },
+    {
+      "id": "e12",
+      "source": "prestatario",
+      "target": "account",
+      "relation": "designates"
+    },
+    {
+      "id": "e13",
+      "source": "disbursement",
+      "target": "use_of_funds",
+      "relation": "funds used for"
+    },
+    {
+      "id": "e14",
+      "source": "use_of_funds",
+      "target": "prohibited_uses",
+      "relation": "excludes"
+    },
+    {
+      "id": "e15",
+      "source": "term_loan",
+      "target": "interest_rate",
+      "relation": "accrues"
+    },
+    {
+      "id": "e16",
+      "source": "revolving_credit",
+      "target": "interest_rate",
+      "relation": "accrues"
+    },
+    {
+      "id": "e17",
+      "source": "contract",
+      "target": "fees",
+      "relation": "includes"
+    },
+    {
+      "id": "e18",
+      "source": "term_loan",
+      "target": "amortization",
+      "relation": "subject to"
+    },
+    {
+      "id": "e19",
+      "source": "revolving_credit",
+      "target": "amortization",
+      "relation": "subject to"
+    },
+    {
+      "id": "e20",
+      "source": "contract",
+      "target": "maturity",
+      "relation": "defines"
+    },
+    {
+      "id": "e21",
+      "source": "prestatario",
+      "target": "prepayment",
+      "relation": "may perform"
+    },
+    {
+      "id": "e22",
+      "source": "contract",
+      "target": "covenants",
+      "relation": "includes"
+    },
+    {
+      "id": "e23",
+      "source": "covenants",
+      "target": "affirmative_covenants",
+      "relation": "includes"
+    },
+    {
+      "id": "e24",
+      "source": "covenants",
+      "target": "negative_covenants",
+      "relation": "includes"
+    },
+    {
+      "id": "e25",
+      "source": "covenants",
+      "target": "financial_covenants",
+      "relation": "includes"
+    },
+    {
+      "id": "e26",
+      "source": "prestatario",
+      "target": "financial_reporting",
+      "relation": "must provide"
+    },
+    {
+      "id": "e27",
+      "source": "contract",
+      "target": "events_default",
+      "relation": "defines"
+    },
+    {
+      "id": "e28",
+      "source": "prestatario",
+      "target": "material_adverse_change",
+      "relation": "must notify"
+    }
+  ]
+}

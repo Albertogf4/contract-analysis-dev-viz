@@ -8,11 +8,15 @@ from .vectorstore import ChromaVectorStore
 from .embeddings import OpenAILLMClient
 from .graph_builder import KnowledgeGraphBuilder
 from .knowledge_graph import KnowledgeGraphStore
+from .graph_context import GraphContextRetriever
 
 
 class DocumentIndexer:
-    def __init__(self, settings: Settings, vector_store: ChromaVectorStore, graph_builder: Optional[KnowledgeGraphBuilder] = None,
-        graph_store: Optional[KnowledgeGraphStore] = None,):
+    def __init__(self, settings: Settings, 
+                 vector_store: ChromaVectorStore, 
+                 graph_builder: Optional[KnowledgeGraphBuilder] = None,
+                 graph_store: Optional[KnowledgeGraphStore] = None,
+                ):
         self.settings = settings
         self.vector_store = vector_store
         self.graph_builder = graph_builder
@@ -42,10 +46,12 @@ class RAGPipeline:
         settings: Settings,
         vector_store: ChromaVectorStore,
         llm_client: OpenAILLMClient,
+        graph_context_retriever: Optional[GraphContextRetriever] = None
     ):
         self.settings = settings
         self.vector_store = vector_store
         self.llm_client = llm_client
+        self.graph_context_retriever = graph_context_retriever
 
     def answer_question(self, question: str, document_id: str) -> RAGResult:
         # 1. Retrieve relevant chunks for that document
@@ -53,6 +59,7 @@ class RAGPipeline:
             query_text=question,
             top_k=self.settings.top_k,
             document_id=document_id,
+            
         )
 
         # 2. Build context for LLM
@@ -64,7 +71,16 @@ class RAGPipeline:
             )
             context_blocks.append(f"{header}\n{rc.text}")
 
-        # 3. Ask LLM
-        answer = self.llm_client.generate_answer(question, context_blocks)
+        # 3. Build graph context
+        graph_context: Optional[str] = None
+        if self.graph_context_retriever is not None:
+            graph_context = self.graph_context_retriever.build_graph_context(
+                question=question,
+                document_id=document_id,
+                
+            )
+
+        # 4. Ask LLM
+        answer = self.llm_client.generate_answer(question, context_blocks, graph_context=graph_context)
 
         return RAGResult(answer=answer, context_chunks=retrieved_chunks)

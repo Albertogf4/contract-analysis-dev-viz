@@ -22,3 +22,5 @@ class Settings:
     # Knowledge graph
     graph_dir: str = os.environ.get("GRAPH_DIR", "./graphs")
     graph_max_chars: int = int(os.environ.get("GRAPH_MAX_CHARS", "12000"))
+    # how many nodes from the graph to include in the prompt
+    graph_context_top_k_nodes: int = int(os.environ.get("GRAPH_CONTEXT_TOP_K_NODES", "5"))
