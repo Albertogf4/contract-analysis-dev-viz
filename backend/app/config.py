@@ -1,4 +1,3 @@
-# app/config.py
 from dataclasses import dataclass
 import os
 
@@ -19,3 +18,7 @@ class Settings:
     top_k: int = int(os.environ.get("RAG_TOP_K", "4"))
     chunk_size: int = int(os.environ.get("CHUNK_SIZE", "1000"))
     chunk_overlap: int = int(os.environ.get("CHUNK_OVERLAP", "200"))
+
+    # Knowledge graph
+    graph_dir: str = os.environ.get("GRAPH_DIR", "./graphs")
+    graph_max_chars: int = int(os.environ.get("GRAPH_MAX_CHARS", "12000"))

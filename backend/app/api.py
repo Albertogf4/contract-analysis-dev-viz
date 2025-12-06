@@ -1,4 +1,3 @@
-# app/api.py
 import os
 import uuid
 from flask import Flask, request, jsonify, send_from_directory
@@ -9,6 +8,8 @@ from .config import Settings
 from .embeddings import OpenAIEmbeddingClient, OpenAILLMClient
 from .vectorstore import ChromaVectorStore
 from .rag import DocumentIndexer, RAGPipeline
+from .graph_builder import KnowledgeGraphBuilder
+from .knowledge_graph import KnowledgeGraphStore
 
 
 def create_app() -> Flask:
@@ -29,12 +30,16 @@ def create_app() -> Flask:
 
     os.makedirs(settings.upload_dir, exist_ok=True)
     os.makedirs(settings.chroma_db_dir, exist_ok=True)
+    os.makedirs(settings.graph_dir, exist_ok=True)
 
     embedding_client = OpenAIEmbeddingClient(settings)
     llm_client = OpenAILLMClient(settings)
     vector_store = ChromaVectorStore(settings, embedding_client)
 
-    indexer = DocumentIndexer(settings, vector_store)
+    graph_store = KnowledgeGraphStore(settings)
+    graph_builder = KnowledgeGraphBuilder(settings)
+
+    indexer = DocumentIndexer(settings, vector_store, graph_builder=graph_builder, graph_store=graph_store)
     rag_pipeline = RAGPipeline(settings, vector_store, llm_client)
 
     # ---------- Routes ----------
@@ -60,7 +65,7 @@ def create_app() -> Flask:
         file.save(file_path)
 
         # Index PDF in vector store
-        doc_id_from_indexer = indexer.index_pdf(file_path)
+        doc_id_from_indexer = indexer.index_pdf(file_path, document_id=document_id)
 
         # NOTE: doc_id_from_indexer == document_id if you propagate it
         # from the filename; here the parser generates its own id.
@@ -122,5 +127,20 @@ def create_app() -> Flask:
                 )
 
         return jsonify({"error": "Document not found"}), 404
+    
+    # ---------- Knowledge graph endpoints ----------
+    @app.route("/api/graph/<document_id>", methods=["GET"])
+    def get_full_graph(document_id: str):
+        graph = graph_store.load_graph(document_id)
+        if graph is None:
+            return jsonify({"error": "Graph not found"}), 404
+        return jsonify(graph.to_dict()), 200
+
+    @app.route("/api/graph/<document_id>/node/<node_id>", methods=["GET"])
+    def get_node_subgraph(document_id: str, node_id: str):
+        subgraph = graph_store.get_node_and_neighbors(document_id, node_id)
+        if subgraph is None:
+            return jsonify({"error": "Node or graph not found"}), 404
+        return jsonify(subgraph), 200
 
     return app

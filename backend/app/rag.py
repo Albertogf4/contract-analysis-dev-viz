@@ -1,5 +1,4 @@
-# app/rag.py
-from typing import List
+from typing import List, Optional
 
 from .config import Settings
 from .models import RAGResult
@@ -7,22 +6,32 @@ from .preprocessing import parse_pdf_to_document_pypdf2
 from .chunking import chunk_parsed_document
 from .vectorstore import ChromaVectorStore
 from .embeddings import OpenAILLMClient
+from .graph_builder import KnowledgeGraphBuilder
+from .knowledge_graph import KnowledgeGraphStore
 
 
 class DocumentIndexer:
-    def __init__(self, settings: Settings, vector_store: ChromaVectorStore):
+    def __init__(self, settings: Settings, vector_store: ChromaVectorStore, graph_builder: Optional[KnowledgeGraphBuilder] = None,
+        graph_store: Optional[KnowledgeGraphStore] = None,):
         self.settings = settings
         self.vector_store = vector_store
+        self.graph_builder = graph_builder
+        self.graph_store = graph_store
 
-    def index_pdf(self, file_path: str) -> str:
+    def index_pdf(self, file_path: str, document_id: Optional[str] = None) -> str:
         # 1. Parse PDF (stub -> Llamaparse in future)
-        parsed_doc = parse_pdf_to_document_pypdf2(file_path)
+        parsed_doc = parse_pdf_to_document_pypdf2(file_path, document_id=document_id)
 
         # 2. Chunk
         chunks = chunk_parsed_document(parsed_doc, self.settings)
 
         # 3. Store in vector DB
         self.vector_store.add_chunks(chunks)
+
+        # 4. Build and store knowledge graph (optional)
+        if self.graph_builder is not None and self.graph_store is not None:
+            graph = self.graph_builder.build_graph(parsed_doc)
+            self.graph_store.save_graph(graph)
 
         return parsed_doc.document_id
 

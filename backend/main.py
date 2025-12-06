@@ -1,4 +1,3 @@
-# main.py
 import os
 from app.api import create_app
 
