@@ -1,0 +1,211 @@
+{
+  "document_id": "8c13be6d-7932-4f41-bddb-d8b53c234b5c",
+  "nodes": [
+    {
+      "id": "cfa_institute",
+      "label": "CFA Institute",
+      "type": "entity",
+      "description": "Organization that establishes the Code of Ethics and Standards of Professional Conduct for investment professionals."
+    },
+    {
+      "id": "code_of_ethics",
+      "label": "Code of Ethics",
+      "type": "process",
+      "description": "Set of ethical principles guiding CFA members and candidates to act with integrity, competence, and professionalism."
+    },
+    {
+      "id": "standards_of_conduct",
+      "label": "Standards of Professional Conduct",
+      "type": "process",
+      "description": "Detailed rules and guidelines that CFA members and candidates must follow in their professional activities."
+    },
+    {
+      "id": "members_and_candidates",
+      "label": "Members and Candidates",
+      "type": "entity",
+      "description": "Individuals who hold CFA designation or are pursuing it, required to adhere to the Code and Standards."
+    },
+    {
+      "id": "integrity",
+      "label": "Integrity",
+      "type": "concept",
+      "description": "Core value requiring honesty and ethical behavior in all professional activities."
+    },
+    {
+      "id": "professionalism",
+      "label": "Professionalism",
+      "type": "concept",
+      "description": "Requirement to act competently, diligently, and ethically while complying with laws and regulations."
+    },
+    {
+      "id": "independence_and_objectivity",
+      "label": "Independence and Objectivity",
+      "type": "concept",
+      "description": "Obligation to maintain unbiased judgment and avoid conflicts of interest."
+    },
+    {
+      "id": "confidential_information",
+      "label": "Confidential Information",
+      "type": "concept",
+      "description": "Sensitive client or market information that must not be misused or disclosed improperly."
+    },
+    {
+      "id": "market_integrity",
+      "label": "Market Integrity",
+      "type": "concept",
+      "description": "Principle to avoid market manipulation and ensure fair and transparent capital markets."
+    },
+    {
+      "id": "client_obligations",
+      "label": "Obligations to Clients",
+      "type": "process",
+      "description": "Duties including loyalty, prudence, fair treatment, suitability, confidentiality, and accurate performance reporting."
+    },
+    {
+      "id": "employer_obligations",
+      "label": "Obligations to Employers",
+      "type": "process",
+      "description": "Responsibilities to act loyally, avoid conflicts of interest, and supervise compliance within the workplace."
+    },
+    {
+      "id": "investment_analysis",
+      "label": "Investment Analysis, Recommendations, and Decisions",
+      "type": "process",
+      "description": "Requirement to apply diligence, reasonable judgment, and clear communication in investment activities."
+    },
+    {
+      "id": "conflicts_of_interest",
+      "label": "Conflicts of Interest",
+      "type": "risk",
+      "description": "Situations that may impair objective decision-making, requiring full disclosure and prioritization of client and employer interests."
+    },
+    {
+      "id": "disciplinary_measures",
+      "label": "Disciplinary Measures",
+      "type": "process",
+      "description": "Actions taken by CFA Institute against members or candidates who violate the Code or Standards, including revocation of membership or designation."
+    },
+    {
+      "id": "duties_as_cfa_member",
+      "label": "Responsibilities as CFA Member or Candidate",
+      "type": "process",
+      "description": "Obligations to uphold the reputation and integrity of the CFA Institute, designation, and programs."
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "cfa_institute",
+      "target": "code_of_ethics",
+      "relation": "establishes"
+    },
+    {
+      "id": "e2",
+      "source": "cfa_institute",
+      "target": "standards_of_conduct",
+      "relation": "establishes"
+    },
+    {
+      "id": "e3",
+      "source": "members_and_candidates",
+      "target": "code_of_ethics",
+      "relation": "must adhere to"
+    },
+    {
+      "id": "e4",
+      "source": "members_and_candidates",
+      "target": "standards_of_conduct",
+      "relation": "must adhere to"
+    },
+    {
+      "id": "e5",
+      "source": "code_of_ethics",
+      "target": "integrity",
+      "relation": "requires"
+    },
+    {
+      "id": "e6",
+      "source": "code_of_ethics",
+      "target": "professionalism",
+      "relation": "requires"
+    },
+    {
+      "id": "e7",
+      "source": "code_of_ethics",
+      "target": "independence_and_objectivity",
+      "relation": "requires"
+    },
+    {
+      "id": "e8",
+      "source": "standards_of_conduct",
+      "target": "confidential_information",
+      "relation": "protects"
+    },
+    {
+      "id": "e9",
+      "source": "standards_of_conduct",
+      "target": "market_integrity",
+      "relation": "promotes"
+    },
+    {
+      "id": "e10",
+      "source": "members_and_candidates",
+      "target": "client_obligations",
+      "relation": "have"
+    },
+    {
+      "id": "e11",
+      "source": "members_and_candidates",
+      "target": "employer_obligations",
+      "relation": "have"
+    },
+    {
+      "id": "e12",
+      "source": "members_and_candidates",
+      "target": "investment_analysis",
+      "relation": "must perform"
+    },
+    {
+      "id": "e13",
+      "source": "members_and_candidates",
+      "target": "conflicts_of_interest",
+      "relation": "must disclose"
+    },
+    {
+      "id": "e14",
+      "source": "conflicts_of_interest",
+      "target": "client_obligations",
+      "relation": "must not impair"
+    },
+    {
+      "id": "e15",
+      "source": "conflicts_of_interest",
+      "target": "employer_obligations",
+      "relation": "must not impair"
+    },
+    {
+      "id": "e16",
+      "source": "cfa_institute",
+      "target": "disciplinary_measures",
+      "relation": "enforces"
+    },
+    {
+      "id": "e17",
+      "source": "disciplinary_measures",
+      "target": "members_and_candidates",
+      "relation": "applies to"
+    },
+    {
+      "id": "e18",
+      "source": "members_and_candidates",
+      "target": "duties_as_cfa_member",
+      "relation": "must fulfill"
+    },
+    {
+      "id": "e19",
+      "source": "duties_as_cfa_member",
+      "target": "cfa_institute",
+      "relation": "protects reputation of"
+    }
+  ]
+}

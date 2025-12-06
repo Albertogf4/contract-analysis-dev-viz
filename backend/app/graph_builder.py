@@ -27,35 +27,35 @@ class KnowledgeGraphBuilder:
 
     def _build_prompt(self, text: str) -> List:
         template = """
-                    You are an AI that extracts a simple knowledge graph from a document.
+                You are an AI that extracts a simple knowledge graph from a document.
 
-                    Read the text and identify the core concepts, entities and how they relate.
-                    Return ONLY valid JSON with this structure (no explanation, no markdown):
+                Read the text and identify the core concepts, entities and how they relate.
+                Return ONLY valid JSON with this structure (no explanation, no markdown):
 
-                    {
-                    "nodes": [
-                        {
-                        "id": "string (short, unique)",
-                        "label": "human-readable name",
-                        "type": "high-level type (e.g. 'entity', 'process', 'risk', 'metric')",
-                        "description": "1-2 sentence summary in plain language"
-                        }
-                    ],
-                    "edges": [
-                        {
-                        "id": "string (short, unique)",
-                        "source": "node_id",
-                        "target": "node_id",
-                        "relation": "short verb phrase describing the relation"
-                        }
-                    ]
-                    }
+                {{
+                "nodes": [
+                    {{
+                    "id": "string (short, unique)",
+                    "label": "human-readable name",
+                    "type": "high-level type (e.g. 'entity', 'process', 'risk', 'metric')",
+                    "description": "1-2 sentence summary in plain language"
+                    }}
+                ],
+                "edges": [
+                    {{
+                    "id": "string (short, unique)",
+                    "source": "node_id",
+                    "target": "node_id",
+                    "relation": "short verb phrase describing the relation"
+                    }}
+                ]
+                }}
 
-                    Keep it compact (10-30 nodes, 10-50 edges). Focus on the main ideas of the document.
+                Keep it compact (10-30 nodes, 10-50 edges). Focus on the main ideas of the document.
 
-                    TEXT:
-                    {text}
-                    """
+                TEXT:
+                {text}
+                """
         prompt = ChatPromptTemplate.from_template(template)
         return prompt.format_messages(text=text)
 

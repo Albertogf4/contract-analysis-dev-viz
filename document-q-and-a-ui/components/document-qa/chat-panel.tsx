@@ -5,6 +5,8 @@ import { AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ChatMessages } from "./chat-messages"
 import { QuestionInput } from "./question-input"
+import { KnowledgeGraphButton } from "./knowledge-graph-button"
+import { KnowledgeGraphDrawer } from "./knowledge-graph-drawer"
 import type { UploadedDocument, Message } from "./document-qa-app"
 import { useToast } from "@/hooks/use-toast"
 
@@ -17,10 +19,12 @@ interface ChatPanelProps {
 
 export function ChatPanel({ activeDoc, messages, onAddMessage, onClearMessages }: ChatPanelProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const [isGraphOpen, setIsGraphOpen] = useState(false)
   const { toast } = useToast()
 
   const isDocProcessing = activeDoc?.status !== "Ready"
   const isDisabled = !activeDoc || isDocProcessing || isLoading
+  const isGraphEnabled = activeDoc?.status === "Ready"
 
   const handleSendQuestion = async (question: string) => {
     if (!activeDoc || !question.trim()) return
@@ -83,11 +87,18 @@ export function ChatPanel({ activeDoc, messages, onAddMessage, onClearMessages }
           <h2 className="text-lg font-semibold">{activeDoc ? activeDoc.filename : "No document selected"}</h2>
           {activeDoc && <p className="text-xs text-muted-foreground mt-1">Status: {activeDoc.status}</p>}
         </div>
+        <div className="flex items-center gap-2">
+          <KnowledgeGraphButton
+            isEnabled={isGraphEnabled}
+            isOpen={isGraphOpen}
+            onClick={() => setIsGraphOpen(!isGraphOpen)}
+          />
         {messages.length > 0 && (
           <Button variant="outline" size="sm" onClick={onClearMessages}>
             Clear
           </Button>
         )}
+        </div>
       </div>
 
       {/* Messages */}
@@ -129,6 +140,17 @@ export function ChatPanel({ activeDoc, messages, onAddMessage, onClearMessages }
           }
         />
       </div>
+
+
+      {/* Knowledge Graph Drawer */}
+      {activeDoc && (
+        <KnowledgeGraphDrawer
+          isOpen={isGraphOpen}
+          onClose={() => setIsGraphOpen(false)}
+          documentId={activeDoc.document_id}
+          documentName={activeDoc.filename}
+        />
+      )}
     </div>
   )
 }
